@@ -24,7 +24,7 @@ insert_base = "insert into ftx_futures_btc values('{basetime}','{symbol}','{expi
 with psycopg2.connect(host=host, dbname=dbname, user=user, password=password) as conn:
     with conn.cursor() as cur:
         basetime = datetime.datetime.now()
-        basetime = basetime.astimezone(timezone('Asia/Tokyo'))
+        basetime = basetime.astimezone(timezone('UTC'))
         basetime = datetime.datetime.strftime(basetime, '%Y-%m-%dT%H:%M:00')
         for d in df_futures_db.itertuples():
             insert_sql = insert_base.format(basetime=basetime
